@@ -1,7 +1,8 @@
 pipeline{
 
     environment{
-        imagename = "itssidhu/my-api-app"
+        imagename = "itssidhu/my-api-app",
+        workspace=env.WORKSPACE
     }
     agent{
         label 'docker'
@@ -50,7 +51,7 @@ pipeline{
         stage('Run'){
             steps{
                 script{
-                docker.image(imagename).withRun('-p 2100:8800 -v $WORKSPACE:/test/automation/itssidhu'){
+                docker.image(imagename).withRun('-p 2100:8800 -v $workspace:/test/automation/itssidhu'){
                     /* do things */
                 }
                 }
