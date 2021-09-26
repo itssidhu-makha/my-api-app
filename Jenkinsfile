@@ -61,6 +61,7 @@ pipeline{
             steps{
             sh "docker rmi $imagename:$BUILD_NUMBER"
             sh "docker rmi $imagename:latest"
+            }
         }
     }
 }
