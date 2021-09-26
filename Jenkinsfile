@@ -14,14 +14,14 @@ pipeline{
 
         stage('build'){
             steps{
-                image = docker.build("itssidhu/my-api-app")
+                app = docker.build("itssidhu/my-api-app")
             }
           
         }
 
         stage('Test'){
             steps{
-                image.inside{
+                app.inside{
                 sh 'echo "image has been build successfully"'
                 }
             }
@@ -29,10 +29,10 @@ pipeline{
         }
 
         stage('push'){
-            step{
+            steps{
                 docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                    image.push("${env.BUILD_NUMBER}")
-                    image.push("latest")
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
                 }
             }
         }
