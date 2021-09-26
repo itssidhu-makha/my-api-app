@@ -50,7 +50,7 @@ pipeline{
         stage('Run'){
             steps{
                 script{
-                docker.image(imagename).withRun('-p 2100:8800'){
+                docker.image(imagename).withRun('-p 2100:8800 -v $WORKSPACE:/test/automation/itssidhu'){
                     /* do things */
                 }
                 }
