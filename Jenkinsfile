@@ -1,7 +1,7 @@
 pipeline{
 
     environment{
-        imagename = "itssidhu/my-api-app",
+        imagename = "itssidhu/my-api-app"
         workspace=env.WORKSPACE
     }
     agent{
