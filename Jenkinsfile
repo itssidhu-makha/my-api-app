@@ -8,7 +8,7 @@ pipeline{
     }
     stages{
 
-        stage('checkout from git'){
+        stage('checkout'){
             steps{
             git branch: 'main', 
             credentialsId: 'GithubAccount',
@@ -16,7 +16,7 @@ pipeline{
             }
         }
 
-        stage('build the image'){
+        stage('build'){
             steps{
                 script{
                 app = docker.build imagename                
@@ -25,7 +25,8 @@ pipeline{
           
         }
 
-        stage('push the image'){
+
+        stage('push'){
             steps{
                 script{
                 docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-login'){
@@ -36,10 +37,10 @@ pipeline{
             }
         }
 
-        stage('Run container port 2100'){
+        stage('Run'){
             steps{
                 script{
-                docker.image(imagename).run(['-p 2100:8800']){
+                docker.image(imagename).withRun('-p 2100:8800'){
                     /* do things */
                 }
                 }
