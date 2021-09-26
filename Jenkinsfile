@@ -21,6 +21,7 @@ pipeline{
             steps{
                 script{
                 app = docker.build imagename
+                sh 'echo "workpace is $workspace, ${workspace} , "$workpace" "'
                 }
             }
           
