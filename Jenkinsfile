@@ -1,4 +1,8 @@
 pipeline{
+
+    environment{
+        imagename = "itssidhu/my-api-app"
+    }
     agent{
         label 'docker'
     }
@@ -15,28 +19,28 @@ pipeline{
         stage('build'){
             steps{
                 script{
-                app = docker.build("itssidhu/my-api-app")
+                app = docker.build imagename
                 }
             }
           
         }
 
-        stage('Test'){
-            steps{
-                script{
-                app.inside{
-                sh 'echo "image has been build successfully"'
-                }
-                }
-            }
+        // stage('Test'){
+        //     steps{
+        //         script{
+        //         app.inside{
+        //         sh 'echo "image has been build successfully"'
+        //         }
+        //         }
+        //     }
            
-        }
+        // }
 
         stage('push'){
             steps{
                 script{
                 docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                    app.push("${env.BUILD_NUMBER}")
+                    app.push("$BUILD_NUMBER")
                     app.push("latest")
                 }
                 }
@@ -46,12 +50,17 @@ pipeline{
         stage('Run'){
             steps{
                 script{
-                docker.image('itssidhu/my-api-app').withRun('-p 2100:8800'){
+                docker.image(imagename).withRun('-p 2100:8800'){
                     /* do things */
                 }
                 }
             }
         }
 
+        stage('Remove Unused docker image') {
+            steps{
+            sh "docker rmi $imagename:$BUILD_NUMBER"
+            sh "docker rmi $imagename:latest"
+        }
     }
 }
