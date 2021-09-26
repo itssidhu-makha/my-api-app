@@ -1,4 +1,4 @@
-#Building the image
+# Building the image
 docker build . -t itssidhu/my-api-app
   
 # my-api-app
