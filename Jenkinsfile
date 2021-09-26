@@ -2,7 +2,7 @@ pipeline{
 
     environment{
         imagename = "itssidhu/my-api-app"
-        workspace=env.WORKSPACE
+        workspace="${env.WORKSPACE}"
     }
     agent{
         label 'docker'
