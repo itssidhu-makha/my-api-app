@@ -39,7 +39,7 @@ pipeline{
         stage('Run container port 2100'){
             steps{
                 script{
-                docker.image(imagename).run('-p 2100:8800'){
+                docker.image(imagename).run(['-p 2100:8800']){
                     /* do things */
                 }
                 }
