@@ -1,8 +1,7 @@
 pipeline{
 
     environment{
-        imagename = "itssidhu/my-api-app"
-        workspace="${env.WORKSPACE}"
+        imagename = "itssidhu/my-api-app"     
     }
     agent{
         label 'docker'
@@ -25,17 +24,6 @@ pipeline{
             }
           
         }
-
-        // stage('Test'){
-        //     steps{
-        //         script{
-        //         app.inside{
-        //         sh 'echo "image has been build successfully"'
-        //         }
-        //         }
-        //     }
-           
-        // }
 
         stage('push'){
             steps{
