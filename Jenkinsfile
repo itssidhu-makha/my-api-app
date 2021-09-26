@@ -51,7 +51,7 @@ pipeline{
         stage('Run'){
             steps{
                 script{
-                docker.image(imagename).withRun('-p 2100:8800 -v F:\Jenkins-node\workspace\API-Job:/test/automation/itssidhu'){
+                docker.image(imagename).withRun('-p 2100:8800 -v F:/Jenkins-node/workspace/API-Job:/test/automation/itssidhu'){
                     /* do things */
                 }
                 }
