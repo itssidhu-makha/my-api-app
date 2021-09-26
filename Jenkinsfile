@@ -1,7 +1,9 @@
 pipeline{
-    agent agent-api
+    agent{
+        label 'docker'
+    }
     stages{
-        
+
         stage('checkout code'){
             git branch: 'main', credentialsId: 'GithubAccount', url: 'https://github.com/itssidhu-makha/my-api-app.git'
         }
